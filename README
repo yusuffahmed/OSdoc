@@ -1,0 +1,114 @@
+# CPU Scheduling Simulator — SJF & Priority
+
+A Java Swing desktop application that simulates and compares four CPU scheduling algorithms side-by-side, complete with Gantt charts, performance metrics, and starvation detection.
+
+---
+
+## 📋 Overview
+
+This project implements and visually compares:
+
+| Algorithm | Type |
+|---|---|
+| **SJF** — Shortest Job First | Non-Preemptive |
+| **SRTF** — Shortest Remaining Time First | Preemptive |
+| **Priority Scheduling** | Non-Preemptive |
+| **Preemptive Priority Scheduling** | Preemptive |
+
+The simulator runs all four algorithms simultaneously on the same input, allowing direct performance comparison through Gantt charts, results tables, ready queue logs, and a conclusion report.
+
+---
+
+## Features
+
+- **Interactive GUI** — Add processes manually or load built-in test scenarios
+- **4 Gantt Charts** — Visual timeline of execution order and preemption points for each algorithm
+- **Metrics Tables** — Per-process CT, TAT, WT, and RT for all four algorithms
+- **Ready Queue Log** — Tracks how processes enter and leave the ready queue over time
+- **Conclusion Report** — Automatic comparative analysis with starvation detection and best-algorithm recommendation
+- **Input Validation** — Rejects negative arrival times, zero burst times, non-numeric input, and duplicate PIDs
+- **Preset Scenarios** — 4 built-in scenarios covering basic workloads, BT vs Priority conflict, starvation risk, and validation edge cases
+
+---
+
+##  How to Run
+
+### Requirements
+- Java JDK 8 or higher
+- NetBeans IDE (recommended) **or** any Java IDE / command line
+
+### Run via NetBeans
+1. Open NetBeans and select **File → Open Project**
+2. Navigate to the `OSproject` folder and open it
+3. Click **Run Project** (F6)
+
+### Run via Command Line
+```bash
+# Navigate to the project directory
+cd OSproject
+
+# Compile all source files
+javac -d build/classes src/model/*.java src/metrics/*.java src/scheduler/*.java src/gui/*.java
+
+# Run the application
+java -cp build/classes gui.MainGUI
+```
+
+---
+
+## 🖥️ How to Use
+
+1. **Add Processes** — Enter PID, Arrival Time (AT), Burst Time (BT), and Priority, then click **Add Process**
+2. **Load a Scenario** — Click any of the scenario buttons (A, B, C, D) to auto-fill a preset test case
+3. **Run Simulation** — Click **Run Simulation** to execute all four algorithms simultaneously
+4. **View Results** — Scroll through the Gantt charts, metrics tables, ready queue log, and conclusion
+5. **Clear / Reset** — Use the Clear or Reset buttons to start over
+
+---
+
+## 📁 Project Structure
+
+```
+OSproject/
+├── src/
+│   ├── gui/
+│   │   ├── MainGUI.java          # Main application window (Swing)
+│   │   └── GanttChartPanel.java  # Custom Gantt chart rendering
+│   ├── model/
+│   │   ├── Process.java          # Process data model
+│   │   └── GanttData.java        # Gantt chart data model
+│   ├── scheduler/
+│   │   ├── SJFScheduler.java              # SJF Non-Preemptive
+│   │   ├── SRTFScheduler.java             # SRTF Preemptive
+│   │   ├── PriorityScheduler.java         # Priority Non-Preemptive
+│   │   └── PreemptivePriorityScheduler.java # Priority Preemptive
+│   └── metrics/
+│       └── MetricsCalculator.java         # CT, TAT, WT, RT calculations
+└── nbproject/                    # NetBeans project config
+```
+
+---
+
+## 📊 Metrics Explained
+
+| Metric | Formula | Description |
+|---|---|---|
+| **CT** — Completion Time | — | Time when process finishes execution |
+| **TAT** — Turnaround Time | CT − AT | Total time from arrival to completion |
+| **WT** — Waiting Time | TAT − BT | Time spent waiting in the ready queue |
+| **RT** — Response Time | Start Time − AT | Time from arrival to first CPU assignment |
+
+---
+
+## ⚖️ Algorithm Trade-offs
+
+- **SJF / SRTF** optimize for minimum average waiting time — best for throughput-focused systems
+- **Priority / Preemptive Priority** ensure critical processes run first — essential for real-time systems
+- **Preemptive algorithms** respond faster but introduce context-switching overhead
+- **Priority algorithms** risk **starvation** for low-priority processes unless an aging mechanism is added
+
+---
+
+## 👥 Team
+
+Operating Systems Project — Computer Science Department
